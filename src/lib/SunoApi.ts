@@ -304,6 +304,7 @@ class SunoApi {
     title: string = "",
     model?: string,
   ): Promise<AudioInfo> {
+    await this.keepAlive(false);
     const response = await this.client.post(`${SunoApi.BASE_URL}/api/generate/v2/`, {
       continue_clip_id: audioId,
       continue_at: continueAt,
@@ -311,8 +312,12 @@ class SunoApi {
       prompt: prompt,
       tags: tags,
       title: title
+    },
+    {
+      timeout: 10000, // 10 seconds timeout
     });
     console.log("response：\n", response);
+    await this.keepAlive(true);
     return response.data;
   }
 
