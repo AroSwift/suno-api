@@ -188,6 +188,10 @@ class SunoApi {
     model?: string,
     wait_audio: boolean = false
   ): Promise<AudioInfo[]> {
+    if (make_instrumental) {
+      prompt = ""
+    }
+
     await this.keepAlive(false);
     const payload: any = {
       make_instrumental: make_instrumental == true,

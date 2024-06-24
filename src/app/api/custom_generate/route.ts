@@ -10,7 +10,7 @@ export async function POST(req: NextRequest) {
     try {
       const body = await req.json();
       const { prompt, tags, title, make_instrumental, model, wait_audio } = body;
-      if (!prompt || !tags || !title) {
+      if (!tags || !title) {
         return new NextResponse(JSON.stringify({ error: 'Prompt, tags, and title are required' }), {
           status: 400,
           headers: {
